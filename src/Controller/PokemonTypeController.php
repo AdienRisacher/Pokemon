@@ -12,14 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/pokemons")
- */
+#[Route('/pokemon/type')]
 class PokemonTypeController extends AbstractController
 {
-    /**
-     * @Route("/", name="pokemon_type_index", methods={"GET"})
-     */
+    #[Route('/', name: 'pokemon_type_index', methods: ['GET'])]
     public function index(EntityRepository $entityRepository): Response
     {
         return $this->render('pokemon_type/index.html.twig', [
@@ -27,9 +23,7 @@ class PokemonTypeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="pokemon_type_new", methods={"GET","POST"})
-     */
+    #[Route('/new', name: 'pokemon_type_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $pokemonType = new PokemonType();
@@ -49,9 +43,7 @@ class PokemonTypeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="pokemon_type_show", methods={"GET"})
-     */
+    #[Route('/{id}', name: 'pokemon_type_show', methods: ['GET'])]
     public function show(PokemonType $pokemonType): Response
     {
         return $this->render('pokemon_type/show.html.twig', [
@@ -59,9 +51,7 @@ class PokemonTypeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="pokemon_type_edit", methods={"GET","POST"})
-     */
+    #[Route('/{id}/edit', name: 'pokemon_type_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, PokemonType $pokemonType, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PokemonTypeType::class, $pokemonType);
@@ -79,9 +69,7 @@ class PokemonTypeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="pokemon_type_delete", methods={"DELETE"})
-     */
+    #[Route('/{id}', name: 'pokemon_type_delete', methods: ['POST'])]
     public function delete(Request $request, PokemonType $pokemonType, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$pokemonType->getId(), $request->request->get('_token'))) {
