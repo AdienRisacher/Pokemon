@@ -10,10 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/elementary/type')]
+/**
+ * @Route("/elementary/type")
+ */
 class ElementaryTypeController extends AbstractController
 {
-    #[Route('/', name: 'app_elementary_type_index', methods: ['GET'])]
+    /**
+     * @Route("/", name="elementary_type_index", methods={"GET"})
+     */
     public function index(EntityManagerInterface $entityManager): Response
     {
         $elementaryTypes = $entityManager
@@ -25,7 +29,9 @@ class ElementaryTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_elementary_type_new', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/new", name="elementary_type_new", methods={"GET","POST"})
+     */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $elementaryType = new ElementaryType();
@@ -45,7 +51,9 @@ class ElementaryTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_elementary_type_show', methods: ['GET'])]
+    /**
+     * @Route("/{id}", name="elementary_type_show", methods={"GET"})
+     */
     public function show(ElementaryType $elementaryType): Response
     {
         return $this->render('elementary_type/show.html.twig', [
@@ -53,7 +61,9 @@ class ElementaryTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_elementary_type_edit', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/{id}/edit", name="elementary_type_edit", methods={"GET","POST"})
+     */
     public function edit(Request $request, ElementaryType $elementaryType, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ElementaryTypeType::class, $elementaryType);
@@ -71,7 +81,9 @@ class ElementaryTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_elementary_type_delete', methods: ['POST'])]
+    /**
+     * @Route("/{id}", name="elementary_type_delete", methods={"DELETE"})
+     */
     public function delete(Request $request, ElementaryType $elementaryType, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$elementaryType->getId(), $request->request->get('_token'))) {

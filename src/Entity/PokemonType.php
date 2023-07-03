@@ -6,7 +6,7 @@ use App\Repository\PokemonRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PokemonRepository::class)]
-class Pokemon
+class PokemonType
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
