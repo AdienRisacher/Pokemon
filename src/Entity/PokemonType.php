@@ -1,52 +1,38 @@
 <?php
 
-
 namespace App\Entity;
+
+use App\Controller\ElementaryTypeController;
+use App\Repository\PokemonTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
-/**
- * @ORM\Entity(repositoryClass="App\Repository\EntityRepository")
- * @ORM\Table(name="ref_pokemon_type")
- */
+
+#[ORM\Entity(repositoryClass: PokemonTypeRepository::class)]
 class PokemonType
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $nom;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="ElementaryType")
-     * @ORM\JoinColumn(name="type_1", referencedColumnName="id")
-     */
-    private $type1;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="ElementaryType")
-     * @ORM\JoinColumn(name="type_2", referencedColumnName="id",nullable=true)
-     */
-    private $type2;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private $evolution;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private $starter;
 
-    /**
-     * @ORM\Column(type="string", length=1,options={"fixed" = true})
-     */
+
+    #[ORM\Column(type: 'string', length: 1)]
     private $typeCourbeNiveau;
+
+    #[ORM\ManyToOne(targetEntity: ElementaryType::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private $type1;
+
+    #[ORM\ManyToOne(targetEntity: ElementaryType::class)]
+    private $type2;
 
     public function getId(): ?int
     {
@@ -65,7 +51,7 @@ class PokemonType
         return $this;
     }
 
-    public function getEvolution(): ?bool
+    public function isEvolution(): ?bool
     {
         return $this->evolution;
     }
@@ -77,7 +63,7 @@ class PokemonType
         return $this;
     }
 
-    public function getStarter(): ?bool
+    public function isStarter(): ?bool
     {
         return $this->starter;
     }
@@ -118,10 +104,12 @@ class PokemonType
         return $this->type2;
     }
 
-    public function setType2(?ElementaryType $type2): self
+    public function setType2(?ElementaryType $type): self
     {
-        $this->type2 = $type2;
+        $this->type2 = $type;
 
         return $this;
     }
+
+
 }

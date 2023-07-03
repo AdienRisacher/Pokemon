@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminbase.html.twig' %}
 
 {% block title %}ElementaryType index{% endblock %}
 
@@ -19,8 +19,8 @@
                 <td>{{ elementary_type.id }}</td>
                 <td>{{ elementary_type.libelle }}</td>
                 <td>
-                    <a href="{{ path('app_elementary_type_show', {'id': elementary_type.id}) }}">show</a>
-                    <a href="{{ path('app_elementary_type_edit', {'id': elementary_type.id}) }}">edit</a>
+                    <a href="{{ path('elementary_type_show', {'id': elementary_type.id}) }}">show</a>
+                    <a href="{{ path('elementary_type_edit', {'id': elementary_type.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_elementary_type_new') }}">Create new</a>
+    <a href="{{ path('elementary_type_new') }}">Create new</a>
 {% endblock %}

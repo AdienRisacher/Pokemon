@@ -2,62 +2,39 @@
 
 namespace App\Entity;
 
+use App\Repository\ElementaryTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="ref_elementary_type")
- */
+#[ORM\Entity(repositoryClass: ElementaryTypeRepository::class)]
 class ElementaryType
 {
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $libelle;
 
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLibelle()
+    public function getLibelle(): ?string
     {
         return $this->libelle;
     }
 
-    /**
-     * @param mixed $libelle
-     */
-    public function setLibelle($libelle)
+    public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
-    }
 
+        return $this;
+    }
 
     public function __toString()
     {
         return $this->libelle;
     }
-
 }

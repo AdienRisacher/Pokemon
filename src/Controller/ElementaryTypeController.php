@@ -4,19 +4,22 @@ namespace App\Controller;
 
 use App\Entity\ElementaryType;
 use App\Form\ElementaryTypeType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/elementary/type')]
+/**
+ * @Route("/elementary/type")
+ */
 class ElementaryTypeController extends AbstractController
 {
-    #[Route('/', name: 'app_elementary_type_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
+    /**
+     * @Route("/", name="elementary_type_index", methods={"GET"})
+     */
+    public function index(): Response
     {
-        $elementaryTypes = $entityManager
+        $elementaryTypes = $this->getDoctrine()
             ->getRepository(ElementaryType::class)
             ->findAll();
 
@@ -25,27 +28,32 @@ class ElementaryTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_elementary_type_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    /**
+     * @Route("/new", name="elementary_type_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
     {
         $elementaryType = new ElementaryType();
         $form = $this->createForm(ElementaryTypeType::class, $elementaryType);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($elementaryType);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_elementary_type_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('elementary_type_index');
         }
 
-        return $this->renderForm('elementary_type/new.html.twig', [
+        return $this->render('elementary_type/new.html.twig', [
             'elementary_type' => $elementaryType,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_elementary_type_show', methods: ['GET'])]
+    /**
+     * @Route("/{id}", name="elementary_type_show", methods={"GET"})
+     */
     public function show(ElementaryType $elementaryType): Response
     {
         return $this->render('elementary_type/show.html.twig', [
@@ -53,32 +61,37 @@ class ElementaryTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_elementary_type_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ElementaryType $elementaryType, EntityManagerInterface $entityManager): Response
+    /**
+     * @Route("/{id}/edit", name="elementary_type_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, ElementaryType $elementaryType): Response
     {
         $form = $this->createForm(ElementaryTypeType::class, $elementaryType);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('app_elementary_type_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('elementary_type_index');
         }
 
-        return $this->renderForm('elementary_type/edit.html.twig', [
+        return $this->render('elementary_type/edit.html.twig', [
             'elementary_type' => $elementaryType,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_elementary_type_delete', methods: ['POST'])]
-    public function delete(Request $request, ElementaryType $elementaryType, EntityManagerInterface $entityManager): Response
+    /**
+     * @Route("/{id}", name="elementary_type_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, ElementaryType $elementaryType): Response
     {
         if ($this->isCsrfTokenValid('delete'.$elementaryType->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($elementaryType);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_elementary_type_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('elementary_type_index');
     }
 }

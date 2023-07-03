@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminbase.html.twig' %}
 
 {% block title %}PokemonType{% endblock %}
 
@@ -18,14 +18,6 @@
             <tr>
                 <th>Evolution</th>
                 <td>{{ pokemon_type.evolution ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Type 1</th>
-                <td>{{ pokemon_type.type1 }}</td>
-            </tr>
-            <tr>
-                <th>Type 2</th>
-                <td>{{ pokemon_type.type2 }}</td>
             </tr>
             <tr>
                 <th>Starter</th>

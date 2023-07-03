@@ -21,7 +21,7 @@ class ElementaryTypeRepository extends ServiceEntityRepository
         parent::__construct($registry, ElementaryType::class);
     }
 
-    public function save(ElementaryType $entity, bool $flush = false): void
+    public function add(ElementaryType $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 

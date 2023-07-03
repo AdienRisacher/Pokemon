@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ 'premier pokemon' }}
+{% endblock %}
+
+{%block stylesheets%}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/firstpokstyle.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900'><link rel="stylesheet" href="./style.css">
+
+{%endblock%}
+
+
+
+
+{% block body %}
+
+    <main id=app>
+
+        <h1>Choisir votre premier Pokemon</h1>
+
+        <section class="cards">
+            <a href="/FirstPokemon/Salameche">   <div class="card charizard animated"></div></a>
+            <a href="/FirstPokemon/Carapuce">   <div class="card pika animated"></div></a>
+            <a href="/FirstPokemon/Bulbizare">   <div class="card mewtwo animated"></div></a>
+        </section>
+
+    </main>
+
+{% endblock %}
+{% block javascripts %}
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script  src= asset('css/firstpokscript.css')   ></script>
+{% endblock %}
+
