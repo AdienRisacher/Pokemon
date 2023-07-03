@@ -4,15 +4,121 @@
     <meta charset="UTF-8">
     <title>pokedex</title>
     <link rel = "icon" href="{{ asset('img/pokemon.png') }}" type = "image/x-icon">
-        <link href="{{ asset('css/index_style.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/pokedex_style.css') }}" rel="stylesheet" />
 </head>
 <body>
-    <div class="infoList">
-        <h1 class="text name">Bienvenue dans le POKEDEX</h1>
+    <div id="container">
+        <!------ LEFT SIDE ------>
+        <div id="left-side">
+            <!-- Rounded bordure left -->
+            <div id="round-bordure-left-side"></div>
+            <div id="round-bordure-left-side2"></div>
+            <!-- Top left lights -->
+            <div id="big-blue-light-background" class="light">
+                <div id="big-blue-light" class="light"></div>
+                <div id="big-blue-light-glint" class="light"></div>
+            </div>
+            <div id="little-lights">
+                <div class="light little-light red-light"></div>
+                <div class="light little-light yellow-light"></div>
+                <div class="light little-light green-light"></div>
+            </div>
+            <!-- Left side big screen with red lights -->
+            <div id="screen-left-background">
+                <div id="screen-left-little-lights">
+                    <div class="screen-left-little-red-light light"></div>
+                    <div class="screen-left-little-red-light light"></div>
+                </div>
+                <!-- Screen for the Pokemon images -->
+                <div id="screen-left">
+                    <img id="screen-left-image" src="" alt="">
+                    <p id="text">Bienvenue !</p>
+                </div>
+                <div id="screen-left-big-red-light" class="light"></div>
+                <div id="screen-left-burger">
+                    <div id="screen-left-burger-inside"></div>
+                </div>
+            </div>
+
+            <!-- Console -->
+            <div id="elongated-buttons">
+                <div class="elongated-button elongated-button1 clickable"></div>
+                <div class="elongated-button elongated-button2 clickable"></div>
+            </div>
+            <div id="rounded-button" class="clickable"></div>
+            <div id="screen-left-little"></div>
+
+            <!-- Cross used to choose the Pokemon -->
+            <div id="cross">
+                <div class="cross cross-top clickable">
+                    <div class="arrow arrow-top"></div>
+                </div>
+                <div class="cross cross-mid"></div>
+                <div class="cross cross-bottom clickable">
+                    <div class="arrow arrow-bottom"></div>
+                </div>
+                <div class="cross cross-left clickable">
+                    <div class="arrow arrow-left" onclick="previousPokemon()"></div>
+                </div>
+                <div class="cross cross-right clickable">
+                    <div class="arrow arrow-right" onclick="nextPokemon()"></div>
+                </div>
+            </div>
+        </div>
+
+        <!------ MIDDLE ------>
+        <!-- Bindings -->
+        <div class="binding">
+            <div class="hinge hinge1"></div>
+            <div class="hinge hinge2"></div>
+            <div class="hinge hinge3"></div>
+        </div>
+
+        <!------ RIGHT SIDE ------>
+        <div id="right-side">
+            <!-- Rounded bordure right -->
+            <div id="round-bordure-right-side"></div>
+            <!-- Right side screen -->
+            <div id="screen-right">
+                <p id="pokemon-title-p"> Identifie toi pour accéder à ton pokedex !<span id="pokemon-title"></span></p>
+            </div>
+            <!-- Right side keyboard -->
+            <div id="keyboard">
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+            </div>
+            <!-- Right elongated lights -->
+            <div id="elongated-lights">
+                <div class="key light"></div>
+                <div class="key light"></div>
+            </div>
+            <!-- Right side yellow light -->
+            <div id="right-side-yellow-light" class="light"></div>
+            <!-- Right side white buttons -->
+            <div id="white-buttons">
+                <div class="key clickable"></div>
+                <div class="key clickable"></div>
+            </div>
+            <!-- Right side grey buttons -->
+            <div id="grey-buttons">
+                <div class="key">
+                    <p id="pokemon-type-1">
+                        <a href="/inscription" class="button-commencer"><span>Commencer </span> <i class="fa-solid fa-circle-arrow-right"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
 <div class="support">
-    <a href="/inscription" class="button-commencer"><span>Commencer </span> <i class="fa-solid fa-circle-arrow-right"></i></a>
 </div>
 
 
