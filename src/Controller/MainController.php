@@ -8,9 +8,8 @@ use App\Repository\EntityRepository;
 
 class MainController extends AbstractController
 {
-    /**
-     * @Route("/", name="homepage")
-     */
+    #[Route('/', name: 'homepage')]
+
     public function index(EntityRepository $entityRepository)
     {
         $pokemons = $entityRepository->findAll();
