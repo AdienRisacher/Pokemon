@@ -12,6 +12,8 @@
 
 
 {% block body %}
+
+
     <div id="container">
         <!------ LEFT SIDE ------>
         <div id="left-side">
@@ -37,7 +39,7 @@
                 <!-- Screen for the Pokemon images -->
                 <div id="screen-left">
                     <img id="screen-left-image" src="" alt="">
-                    <p id="text">Bienvenue !</p>
+                    <p id="text"> Connectez vous !</p>
                 </div>
                 <div id="screen-left-big-red-light" class="light"></div>
                 <div id="screen-left-burger">
@@ -63,10 +65,10 @@
                     <div class="arrow arrow-bottom"></div>
                 </div>
                 <div class="cross cross-left clickable">
-                    <div class="arrow arrow-left" onclick="previousPokemon()"></div>
+                    <div class="arrow arrow-left"></div>
                 </div>
                 <div class="cross cross-right clickable">
-                    <div class="arrow arrow-right" onclick="nextPokemon()"></div>
+                    <div class="arrow arrow-right"></div>
                 </div>
             </div>
         </div>
@@ -85,20 +87,33 @@
             <div id="round-bordure-right-side"></div>
             <!-- Right side screen -->
             <div id="screen-right">
-                <p id="pokemon-title-p"> test <span id="pokemon-title"></span></p>
+                <form class="form" id="b-form" method="post" >
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <input class="form__input" type="text" placeholder="Email" name="email" id="inputEmail" value="{{ last_username }}" required>
+                    <input class="form__input" type="password" placeholder="Password"  name="password" id="inputPassword" required>
+
             </div>
             <!-- Right side keyboard -->
             <div id="keyboard">
-                <div class="key clickable"></div>
-                <div class="key clickable"></div>
-                <div class="key clickable"></div>
-                <div class="key clickable"></div>
-                <div class="key clickable"></div>
-                <div class="key clickable"></div>
-                <div class="key clickable"></div>
-                <div class="key clickable"></div>
-                <div class="key clickable"></div>
-                <div class="key clickable"></div>
+                <div class="key"></div>
+                <div class="key"></div>
+                <div class="key"></div>
+                <div class="key"></div>
+                <div class="key"></div>
+                <div class="key"></div>
+                <div class="key"></div>
+                <div class="key"></div>
+                <div class="key"></div>
+                <div class="key"></div>
             </div>
             <!-- Right elongated lights -->
             <div id="elongated-lights">
@@ -115,8 +130,10 @@
             <!-- Right side grey buttons -->
             <div id="grey-buttons">
                 <div class="key">
-                    <p id="pokemon-type-1">
-                        <a href="/inscription" class="button-commencer"><span>Commencer </span> <i class="fa-solid fa-circle-arrow-right"></i></a>
+                    <p>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <button class="form__button button " type="submit" >Se Connecter</button>
+                        </form>
                     </p>
                 </div>
             </div>
@@ -142,12 +159,6 @@
                 </div>
             {% endif %}
 
-            <h2 class="form_title title">Connectez Vous</h2>
-            <input class="form__input" type="text" placeholder="Email" name="email" id="inputEmail" value="{{ last_username }}" required>
-            <input class="form__input" type="password" placeholder="Password"  name="password" id="inputPassword" required>
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <button class="form__button button " type="submit" >Se connecter</button>
         </form>
     </div>
     <div class="link"><a href="{{path("inscription")}}"><span>S'inscrire</span></a> </div>
