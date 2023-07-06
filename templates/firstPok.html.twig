@@ -6,7 +6,6 @@
 {%block stylesheets%}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/firstpokstyle.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900'><link rel="stylesheet" href="./style.css">
 
 {%endblock%}
@@ -20,10 +19,15 @@
 
         <h1>Choisir votre premier Pokemon</h1>
 
+        <img src="img/Carapuce.png"/>
+        <img src="img/Bulbizarre.png"/>
+        <img src="img/Salameche.png"/>
+
+
         <section class="cards">
-            <a href="/FirstPokemon/Salameche">   <div class="card charizard animated"></div></a>
-            <a href="/FirstPokemon/Carapuce">   <div class="card pika animated"></div></a>
-            <a href="/FirstPokemon/Bulbizare">   <div class="card mewtwo animated"></div></a>
+            <a href="/FirstPokemon/Salameche"></a>
+            <a href="/FirstPokemon/Carapuce.png"></a>
+            <a href="/FirstPokemon/Bulbizare"></a>
         </section>
 
     </main>
