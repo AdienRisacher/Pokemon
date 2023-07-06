@@ -51,7 +51,7 @@ class Dresseur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->mesPokemons = new ArrayCollection();
+        $this->mesPokomons = new ArrayCollection();
     }
 
 
@@ -176,7 +176,7 @@ class Dresseur implements UserInterface, PasswordAuthenticatedUserInterface
     public function addPok(PokemonCollection $pok): self
     {
         if (!$this->mesPokemons->contains($pok)) {
-            $this->mesPokemons[] = $pok;
+            $this->mesPokomons[] = $pok;
             $pok->setDresseur($this);
         }
 
@@ -185,7 +185,7 @@ class Dresseur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removePok(PokemonCollection $pok): self
     {
-        if ($this->mesPokemons->removeElement($pok)) {
+        if ($this->mesPokomons->removeElement($pok)) {
             // set the owning side to null (unless already changed)
             if ($pok->getDresseur() === $this) {
                 $pok->setDresseur(null);

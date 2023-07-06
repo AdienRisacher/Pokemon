@@ -83,19 +83,17 @@
 
                                     <div class="button-wrapper">
                                         {%if pokemon.action == 'dev' or  pokemon.action == 'chasse' %}
-                                            <button class="content-button status-button open">
+                                            <button class="content-button status-button">
                                                 <span class="timer"> {{ pokemon.getTimeRestant()}} </span>
                                             </button>
                                         {% endif %}
-                                        {% if   pokemon.action == 'normale'  %}
-                                            <div class="menu">
-                                                <button class="dropdown">
-                                                    <ul>
-                                                        <li><a href={{ "/Entrainer/#{pokemon.id}" }} }>Entrainer</a></li>
-                                                        <li><a href="#"  onclick="vendre('{{ pokemon.id }}');return false;">Vendre</a></li>
-                                                    </ul>
+                                        {% if pokemon.action == 'normale'  %}
+
+                                                <button>
+                                                        <li class="content-button status-button" style="margin-bottom: 10px"><a href={{ "/Entrainer/#{pokemon.id}" }} }>Entrainer</a></li>
+                                                        <li class="content-button2 status-button"><a href="#"  onclick="vendre('{{ pokemon.id }}');return false;">Vendre</a></li>
                                                 </button>
-                                            </div>
+
                                         {% elseif  pokemon.action == 'market'  %}
                                             <div class="button-wrapper">
                                                 <button id="{{pokemon.id}}" class="content-button2 status-button2"><a   href={{ "/retirerMarcher/#{pokemon.id}" }} >Retirer</a> </button>
