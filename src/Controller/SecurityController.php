@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Dresseur;
+use App\Entity\Dresseurs;
+use App\Form\RegistrationFormType;
 use App\Form\RegistrationType;
 use App\Security\AppLoginAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
