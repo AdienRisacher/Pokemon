@@ -5,309 +5,308 @@
 
 {%block stylesheets%}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/login_pokedex_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 {%endblock%}
 
 {% block body %}
 
-<div class="app">
-    <div class="header">
-        <img class="menu-circle" src="{{ asset('img/logo.png') }}" alt="" />
+    <div class="app">
+        <div class="header">
+            <img class="menu-circle" src="{{ asset('img/logo.png') }}" alt="" />
 
-        <div class="header-menu">
-            <a class="menu-link is-active" href="#Pokemons">Mes Pokemons</a>
-            <a class="menu-link" href="#Market">Market</a>
-            <a class="menu-link" href="#chasse">chasse</a>
-            <a class="menu-link" href="{{path('app_logout')}}">Log Out</a>
-        </div>
-    </div>
-    <div class="wrapper">
-        <div class="left-side">
-            <div class="side-wrapper">
-
-                <div class="side-menu">
-                    <img src="{{ asset('img/pokemon-trainer.png') }}"  alt="">
-                    <a href="">
-                        {{ user.email }}
-                    </a>
-
-                    <a href="#">
-                        <i class="fas fa-dollar-sign" > {{ user.coins }} </i>
-                    </a>
-
-                </div>
-            </div>
-            <div class="side-wrapper">
-                <div class="side-title"></div>
-                <div class="side-menu">
-
-                </div>
+            <div class="header-menu">
+                <a class="menu-link is-active" href="#Pokemons">Mes Pokemons</a>
+                <a class="menu-link" href="#Market">Market</a>
+                <a class="menu-link" href="#chasse">chasse</a>
+                <a class="menu-link" href="{{path('app_logout')}}">Log Out</a>
             </div>
         </div>
-        <div class="main-container">
+        <div class="wrapper">
+            <div class="left-side">
+                <div class="side-wrapper">
 
-            <div class="content-wrapper">
-                <div class="content-wrapper-header"></div>
-                <div class="content-section" id="Pokemons">
-                    <div class="content-section-title">Mes Pokemons</div>
-                    <ul>
+                    <div class="side-menu">
+                        <img src="{{ asset('img/pokemon-trainer.png') }}"  alt="">
+                        <a href="">
+                            {{ user.email }}
+                        </a>
 
-                        {% for pokemon in user.mesPokemons %}
+                        <a href="#">
+                            <i class="fas fa-dollar-sign" > {{ user.coins }} </i>
+                        </a>
 
-                        <li class="adobe-product">
-                            <div class="products">
-                                <img src="{{ asset('img/pokemon.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
-                                {{ pokemon.pokemon.nom }}
-                            </div>
-                            <div class="products" style="padding-left: 50px;">
-                                <img src="{{ asset('img/xp.png') }}" style="width: 30px;  margin-right: 20px;" alt="">
-                                {{ pokemon.experience }} Xp
-                            </div>
-
-                            <div class="products" style="padding-left: 50px;">
-                                <img src="{{ asset('img/level.png') }}" style="width: 50px; margin-right: 5px;" alt="">
-                                {{ pokemon.level }}
-                            </div>
-
-
-                            <span class="status">
-                                {%if pokemon.action == 'normale'%}
-                                      <span class="status-circle"></span>normale</span>
-                                {% elseif pokemon.action == 'market' %}
-                                    <span class="status-circle red"></span>en marché</span>
-                                {% elseif pokemon.action == 'dev' %}
-                                    <span class="status-circle green"></span>entraîné</span>
-                                {% elseif pokemon.action == 'chasse' %}
-                                    <span class="status-circle orange"></span>a chassé</span>
-                                {% endif %}
-
-
-                            <div class="button-wrapper">
-                                {%if pokemon.action == 'dev' or  pokemon.action == 'chasse' %}
-                                <button class="content-button status-button open">
-                                    <span class="timer"> {{ pokemon.getTimeRestant()}} </span>
-                                </button>
-                                {% endif %}
-                                {% if   pokemon.action == 'normale'  %}
-                                    <div class="menu">
-                                        <button class="dropdown">
-                                            <ul>
-                                                <li><a href={{ "/Entrainer/#{pokemon.id}" }} }>Entrainer</a></li>
-                                                <li><a href="#"  onclick="vendre('{{ pokemon.id }}');return false;">Vendre</a></li>
-                                            </ul>
-                                        </button>
-                                    </div>
-                                {% elseif  pokemon.action == 'market'  %}
-                                    <div class="button-wrapper">
-                                        <button id="{{pokemon.id}}" class="content-button2 status-button2"><a   href={{ "/retirerMarcher/#{pokemon.id}" }} >Retirer</a> </button>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </li>
-
-                        {% endfor%}
-
-
-                    </ul>
+                    </div>
                 </div>
-
-
-
-
-                <div class="content-section" id="Market">
-                    <div class="content-section-title">Marché</div>
-                    <ul>
-
-                        {% for pokemon in market %}
-                        <li class="adobe-product">
-                            <div class="products">
-                                <img src="{{ asset('img/pokemon-trainer.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
-                                {{pokemon.dresseur.username}}
-                            </div>
-
-
-                            <div class="products"  style="padding-left: 50px;">
-                                <img src="{{ asset('img/pokemon.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
-                                {{pokemon.pokemon.nom}}
-                            </div>
-
-                            <div class="products" style="padding-left: 50px;">
-                                <img src="{{ asset('img/xp.png') }}" style="width: 30px;  margin-right: 20px;" alt="">
-                                {{pokemon.experience}} Xp
-                            </div>
-
-
-                            <div class="products" style="padding-left: 50px;">
-                                <img src="{{ asset('img/dollar.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
-                                {{pokemon.prix}} $
-                            </div>
-
-                            {% if   pokemon.dresseur.id != user.id  %}
-                                    <div class="button-wrapper">
-                                        <button id="{{pokemon.id}}" onclick="achetter({{pokemon.id}})" class="content-button status-button">Acheter</button>
-                                    </div>
-                             {% endif %}
-                        </li>
-
-                        {% endfor%}
-
-
-                        <div class="button-wrapper">
-                            <div class="pop-up" id="acheter">
-                                <div class="pop-up__title">Acheter Un Nouveau Pokemon
-                                    <svg class="close" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M15 9l-6 6M9 9l6 6" />
-                                    </svg>
-                                </div>
-
-                                <div class="pop-up__subtitle">Voulez vous vraiment acheter ce pokemon</div>
-
-                                <div class="content-button-wrapper">
-                                    <button class="content-button status-button open close">Cancel</button>
-                                    <button class="content-button status-button" ><a id="acherterTag" href="#" >Acheter</a></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="button-wrapper">
-                            <div class="pop-up" id="vendre">
-                                <div class="pop-up__title">Vendre votre Pokemon
-                                    <svg class="close" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M15 9l-6 6M9 9l6 6" />
-                                    </svg>
-                                </div>
-
-                                <form id="vedreforme" action="/vendre" method="post">
-                                    <div class="pop-up__subtitle">Spécifier le prix <input type="text" name="prix"> $ </div>
-                                    <div class="checkbox-wrapper"></div>
-
-                                    <div class="content-button-wrapper">
-                                        <button class="content-button status-button open close">Cancel</button>
-                                        <button type="submit" class="content-button status-button" >Vendre</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-
-                        <div class="button-wrapper">
-                            <div class="pop-up" id="chasser">
-                                <div class="pop-up__title"> Trouver un nouveau pokemon
-                                    <svg class="close" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M15 9l-6 6M9 9l6 6" />
-                                    </svg>
-                                </div>
-
-                                <form id="chasserforme" action="/Chasser" method="post">
-                                    <div class="pop-up__subtitle">Spécifier votre pokemon
-                                        <select name="pokemon" id="pokemon">
-                                            {% for pokemon in user.mesPokemons %}
-                                                {% if   pokemon.action == 'normale'  %}
-                                                    <option value="{{ pokemon.id }}">{{ pokemon.pokemon.nom }}</option>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="checkbox-wrapper"></div>
-
-                                    <div class="content-button-wrapper">
-                                        <button class="content-button status-button open close">Cancel</button>
-                                        <button type="submit" class="content-button status-button" >Chasser</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-
-
-                    </ul>
-                </div>
-
-
-                <div class="content-section" id="chasse">
-                    <div class="content-section-title">Choisir un monde pour chassé</div>
-                    <div class="apps-card">
-                        <div class="app-card">
-                            <img src="{{ asset('img/montagne.png') }}"  alt="">
-                            <span><a href="#"  class="worldbutton" onclick="chasser('montagne');return false;">Montagne</a></span>
-                            <div class="app-card__subtext">
-                                envoyer votre pokemon à la montagne pour capter des nouveaux Pokemons
-
-                            </div>
-
-                            <div class="app-card__subtext categories">
-                                Catégorie : ACIER, Dragon, Glace, Normal, Roche.
-                            </div>
-
-
-                        </div>
-
-                        <div class="app-card">
-                            <img src="{{ asset('img/foret.png') }}" alt="">
-                            <span><a href="#"  class="worldbutton"  onclick="chasser('foret');return false;">  forêt</a></span>
-                            <div class="app-card__subtext">
-                                envoyer votre pokemon à la forêt pour capter des nouveaux Pokemons
-
-                            </div>
-
-                            <div class="app-card__subtext categories">
-                                Catégorie : Insect, Normal, spectre, vol.
-                            </div>
-
-
-                        </div>
-
-                        <div class="app-card">
-                            <img src="{{ asset('img/prairie.png') }}"   alt="">
-                            <span><a href="#" class="worldbutton"  onclick="chasser('prairie');return false;">  prairie</a></span>
-                            <div class="app-card__subtext">
-                                envoyer votre pokemon au praorie pour capter des nouveaux Pokemons
-                            </div>
-
-                            <div class="app-card__subtext categories">
-                                Catégorie : FEU, Normal, plante, sol, vol, feu.
-                            </div>
-
-                        </div>
-
-
-                        <div class="app-card">
-                            <img src="{{ asset('img/ville.png') }}"   alt="">
-                            <span><a href="#"  class="worldbutton"  onclick="chasser('ville');return false;">  ville</a></span>
-                            <div class="app-card__subtext">
-                                envoyer votre pokemon à la ville pour capter des nouveaux Pokemons
-                            </div>
-
-                            <div class="app-card__subtext categories">
-                                Catégorie : Combat, Electrik, Normal, Psy.
-                            </div>
-
-                        </div>
-
-
-                        <div class="app-card">
-                            <img src="{{ asset('img/plage.png') }}"   alt="">
-                            <span><a href="#"  class="worldbutton"  onclick="chasser('plage');return false;">  Plage</a></span>
-                            <div class="app-card__subtext">
-                                envoyer votre pokemon à la ville pour capter des nouveaux Pokemons
-                            </div>
-
-                            <div class="app-card__subtext categories">
-                                Catégorie : Dragon, EAU, Normal, Poinson.
-                            </div>
-
-                        </div>
+                <div class="side-wrapper">
+                    <div class="side-title"></div>
+                    <div class="side-menu">
 
                     </div>
                 </div>
             </div>
+            <div class="main-container">
+
+                <div class="content-wrapper">
+                    <div class="content-section" id="Pokemons">
+                        <div class="content-section-title">Mes Pokemons</div>
+                        <ul>
+
+                            {% for pokemon in user.mesPokemons %}
+
+                                <li class="adobe-product">
+                                    <div class="products">
+                                        <img src="{{ asset('img/pokemon.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
+                                        {{ pokemon.pokemon.nom }}
+                                    </div>
+                                    <div class="products" style="padding-left: 50px;">
+                                        <img src="{{ asset('img/xp.png') }}" style="width: 30px;  margin-right: 20px;" alt="">
+                                        {{ pokemon.experience }} Xp
+                                    </div>
+
+                                    <div class="products" style="padding-left: 50px;">
+                                        <img src="{{ asset('img/level.png') }}" style="width: 50px; margin-right: 5px;" alt="">
+                                        {{ pokemon.level }}
+                                    </div>
+
+
+                                    <span class="status">
+                                {%if pokemon.action == 'normale'%}
+                                      <span class="status-circle"></span>normale</span>
+                                    {% elseif pokemon.action == 'market' %}
+                                        <span class="status-circle red"></span>en marché</span>
+                                    {% elseif pokemon.action == 'dev' %}
+                                        <span class="status-circle green"></span>entraîné</span>
+                                    {% elseif pokemon.action == 'chasse' %}
+                                        <span class="status-circle orange"></span>a chassé</span>
+                                    {% endif %}
+
+
+                                    <div class="button-wrapper">
+                                        {%if pokemon.action == 'dev' or  pokemon.action == 'chasse' %}
+                                            <button class="content-button status-button open">
+                                                <span class="timer"> {{ pokemon.getTimeRestant()}} </span>
+                                            </button>
+                                        {% endif %}
+                                        {% if   pokemon.action == 'normale'  %}
+                                            <div class="menu">
+                                                <button class="dropdown">
+                                                    <ul>
+                                                        <li><a href={{ "/Entrainer/#{pokemon.id}" }} }>Entrainer</a></li>
+                                                        <li><a href="#"  onclick="vendre('{{ pokemon.id }}');return false;">Vendre</a></li>
+                                                    </ul>
+                                                </button>
+                                            </div>
+                                        {% elseif  pokemon.action == 'market'  %}
+                                            <div class="button-wrapper">
+                                                <button id="{{pokemon.id}}" class="content-button2 status-button2"><a   href={{ "/retirerMarcher/#{pokemon.id}" }} >Retirer</a> </button>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </li>
+
+                            {% endfor%}
+
+
+                        </ul>
+                    </div>
+
+
+
+
+                    <div class="content-section" id="Market">
+                        <div class="content-section-title">Marché</div>
+                        <ul>
+
+                            {% for pokemon in market %}
+                                <li class="adobe-product">
+                                    <div class="products">
+                                        <img src="{{ asset('img/pokemon-trainer.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
+                                        {{pokemon.dresseur.username}}
+                                    </div>
+
+
+                                    <div class="products"  style="padding-left: 50px;">
+                                        <img src="{{ asset('img/pokemon.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
+                                        {{pokemon.pokemon.nom}}
+                                    </div>
+
+                                    <div class="products" style="padding-left: 50px;">
+                                        <img src="{{ asset('img/xp.png') }}" style="width: 30px;  margin-right: 20px;" alt="">
+                                        {{pokemon.experience}} Xp
+                                    </div>
+
+
+                                    <div class="products" style="padding-left: 50px;">
+                                        <img src="{{ asset('img/dollar.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
+                                        {{pokemon.prix}} $
+                                    </div>
+
+                                    {% if   pokemon.dresseur.id != user.id  %}
+                                        <div class="button-wrapper">
+                                            <button id="{{pokemon.id}}" onclick="achetter({{pokemon.id}})" class="content-button status-button">Acheter</button>
+                                        </div>
+                                    {% endif %}
+                                </li>
+
+                            {% endfor%}
+
+
+                            <div class="button-wrapper">
+                                <div class="pop-up" id="acheter">
+                                    <div class="pop-up__title">Acheter Un Nouveau Pokemon
+                                        <svg class="close" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <path d="M15 9l-6 6M9 9l6 6" />
+                                        </svg>
+                                    </div>
+
+                                    <div class="pop-up__subtitle">Voulez vous vraiment acheter ce pokemon</div>
+
+                                    <div class="content-button-wrapper">
+                                        <button class="content-button status-button open close">Cancel</button>
+                                        <button class="content-button status-button" ><a id="acherterTag" href="#" >Acheter</a></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="button-wrapper">
+                                <div class="pop-up" id="vendre">
+                                    <div class="pop-up__title">Vendre votre Pokemon
+                                        <svg class="close" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <path d="M15 9l-6 6M9 9l6 6" />
+                                        </svg>
+                                    </div>
+
+                                    <form id="vedreforme" action="/vendre" method="post">
+                                        <div class="pop-up__subtitle">Spécifier le prix <input type="text" name="prix"> $ </div>
+                                        <div class="checkbox-wrapper"></div>
+
+                                        <div class="content-button-wrapper">
+                                            <button class="content-button status-button open close">Cancel</button>
+                                            <button type="submit" class="content-button status-button" >Vendre</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <div class="button-wrapper">
+                                <div class="pop-up" id="chasser">
+                                    <div class="pop-up__title"> Trouver un nouveau pokemon
+                                        <svg class="close" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <path d="M15 9l-6 6M9 9l6 6" />
+                                        </svg>
+                                    </div>
+
+                                    <form id="chasserforme" action="/Chasser" method="post">
+                                        <div class="pop-up__subtitle">Spécifier votre pokemon
+                                            <select name="pokemon" id="pokemon">
+                                                {% for pokemon in user.mesPokemons %}
+                                                    {% if   pokemon.action == 'normale'  %}
+                                                        <option value="{{ pokemon.id }}">{{ pokemon.pokemon.nom }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="checkbox-wrapper"></div>
+
+                                        <div class="content-button-wrapper">
+                                            <button class="content-button status-button open close">Annuler</button>
+                                            <button type="submit" class="content-button status-button" >Chasser</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+                        </ul>
+                    </div>
+
+
+                    <div class="content-section" id="chasse">
+                        <div class="content-section-title">Choisir un monde pour chasser</div>
+                        <div class="apps-card">
+                            <div class="app-card">
+                                <img src="{{ asset('img/montagne.png') }}"  alt="">
+                                <span><a href="#"  class="worldbutton" onclick="chasser('montagne');return false;">La montagne</a></span>
+                                <div class="app-card__subtext">
+                                    Envoyer votre pokemon à la montagne pour capter des nouveaux Pokemons
+
+                                </div>
+
+                                <div class="app-card__subtext categories">
+                                    Catégorie : Acier, Dragon, Glace, Normal, Roche.
+                                </div>
+
+
+                            </div>
+
+                            <div class="app-card">
+                                <img src="{{ asset('img/foret.png') }}" alt="">
+                                <span><a href="#"  class="worldbutton"  onclick="chasser('foret');return false;">La forêt</a></span>
+                                <div class="app-card__subtext">
+                                    Envoyer votre pokemon à la forêt pour capter des nouveaux Pokemons
+
+                                </div>
+
+                                <div class="app-card__subtext categories">
+                                    Catégorie : Insect, Normal, spectre, vol.
+                                </div>
+
+
+                            </div>
+
+                            <div class="app-card">
+                                <img src="{{ asset('img/prairie.png') }}"   alt="">
+                                <span><a href="#" class="worldbutton"  onclick="chasser('prairie');return false;">La prairie</a></span>
+                                <div class="app-card__subtext">
+                                    Envoyer votre pokemon à la prairie pour capter des nouveaux Pokemons
+                                </div>
+
+                                <div class="app-card__subtext categories">
+                                    Catégorie : Feu, Normal, plante, sol, vol, feu.
+                                </div>
+
+                            </div>
+
+
+                            <div class="app-card">
+                                <img src="{{ asset('img/ville.png') }}"   alt="">
+                                <span><a href="#"  class="worldbutton"  onclick="chasser('ville');return false;"> La ville</a></span>
+                                <div class="app-card__subtext">
+                                    Envoyer votre pokemon à la ville pour capter des nouveaux Pokemons
+                                </div>
+
+                                <div class="app-card__subtext categories">
+                                    Catégorie : Combat, Electrik, Normal, Psy.
+                                </div>
+
+                            </div>
+
+
+                            <div class="app-card">
+                                <img src="{{ asset('img/plage.png') }}"   alt="">
+                                <span><a href="#"  class="worldbutton"  onclick="chasser('plage');return false;">  Plage</a></span>
+                                <div class="app-card__subtext">
+                                    envoyer votre pokemon à la ville pour capter des nouveaux Pokemons
+                                </div>
+
+                                <div class="app-card__subtext categories">
+                                    Catégorie : Dragon, EAU, Normal, Poinson.
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="overlay-app"></div>
     </div>
-    <div class="overlay-app"></div>
-</div>
 {% endblock %}
 {% block javascripts %}
 
