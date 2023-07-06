@@ -20,16 +20,12 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class SecurityController extends AbstractController
 {
-
-<<<<<<< HEAD
     /**
      * Login action
      *
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
-=======
->>>>>>> 927127b044577242907420c1f39dd383bcbd023b
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -41,12 +37,7 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-<<<<<<< HEAD
-        return $this->render('security/connexion.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-=======
-
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
->>>>>>> 927127b044577242907420c1f39dd383bcbd023b
+        return $this->render('security/connexion.html.twig' , ['last_username' => $lastUsername , 'error' => $error]);
     }
 
     /**
@@ -60,7 +51,7 @@ class SecurityController extends AbstractController
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
-    #[Route('/inscription', name: 'inscription')]
+    #[Route(path:'/inscription', name: 'inscription')]
     public function registration(Request $request,  UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppLoginAuthenticator $authenticator, EntityManagerInterface $entityManager,AuthenticationUtils $authenticationUtils): Response
     {
         // Redirect to profile if the user is already authenticated
