@@ -26,12 +26,12 @@
                     </div>
                 {% endif %}
 
-                <h2 class="form_title title">Connecter Vous</h2>
+                <h2 class="form_title title">Connectez Vous</h2>
                 <input class="form__input" type="text" placeholder="Email" name="email" id="inputEmail" value="{{ last_username }}" required>
                 <input class="form__input" type="password" placeholder="Password"  name="password" id="inputPassword" required>
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <button class="form__button button " type="submit" >Connecter</button>
+                <button class="form__button button " type="submit" >Se Connecter</button>
             </form>
         </div>
         <div class=   "switch" id="switch-cnt">
@@ -39,8 +39,8 @@
             <div class="switch__circle switch__circle--t"></div>
             <div class="switch__container" id="switch-c1">
                 <h2 class="switch__title title">Bonjour!</h2>
-                <p class="switch__description description">Entrez vos données personnelles et commencez une adventure avec nous</p>
-                <div class="link"><a href="{{path("inscription")}}"><span>inscrire</span></a> </div>
+                <p class="switch__description description">Entrez vos données personnelles et commencez une aventure avec nous</p>
+                <div class="link"><a href="{{path("inscription")}}"><span>S'inscrire</span></a> </div>
             </div>
 
         </div>
