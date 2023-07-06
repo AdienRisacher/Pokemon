@@ -18,15 +18,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
+    // redirect to index
     #[Route('/', name: 'index')]
     public function index()
     {
         return $this->render('index.html.twig');
     }
 
+    // access to the user profile
     #[Route('/profile', name: 'profile')]
     public function getProfile(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager)
     {
+        // if there's no user, redirect to the login page
         $user = $this->getUser();
         if($user == null)
         {
@@ -37,6 +40,8 @@ class MainController extends AbstractController
         {
             return $this->redirectToRoute('homepage');
         }
+
+        // if the user has already a pokemon, get market infos, update the level of each pokemon, show the view
 
         if ($user->isAvoirPremierPok()) {
             $market = $doctrine->getRepository(PokemonCollection::class)->findBy(['action' => 'market']);

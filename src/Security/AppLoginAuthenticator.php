@@ -28,6 +28,9 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * Authenticates the user based on the login form submission.
+     */
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
@@ -43,17 +46,22 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
+    /**
+     * Handles the successful authentication.
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        // Redirects the user to the previously requested page (if any)
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
-        // For example:
+        // Redirects the user to the profile page
         return new RedirectResponse($this->urlGenerator->generate('profile'));
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
+    /**
+     * Returns the URL of the login page.
+     */
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);

@@ -17,6 +17,8 @@ class ElementaryTypeController extends AbstractController
     /**
      * @Route("/", name="elementary_type_index", methods={"GET"})
      */
+    // Retrieve all records of the ElementaryType entity from the database using the Doctrine
+    // entity manager, then pass them to the view to display them.
     public function index(): Response
     {
         $elementaryTypes = $this->getDoctrine()
@@ -31,6 +33,7 @@ class ElementaryTypeController extends AbstractController
     /**
      * @Route("/new", name="elementary_type_new", methods={"GET","POST"})
      */
+    // called when trying to use a new instance of ElementaryType
     public function new(Request $request): Response
     {
         $elementaryType = new ElementaryType();
@@ -54,6 +57,8 @@ class ElementaryTypeController extends AbstractController
     /**
      * @Route("/{id}", name="elementary_type_show", methods={"GET"})
      */
+
+    // show details of an elementaryType object
     public function show(ElementaryType $elementaryType): Response
     {
         return $this->render('elementary_type/show.html.twig', [
@@ -64,6 +69,8 @@ class ElementaryTypeController extends AbstractController
     /**
      * @Route("/{id}/edit", name="elementary_type_edit", methods={"GET","POST"})
      */
+
+    // changing an elementaryType object from a form
     public function edit(Request $request, ElementaryType $elementaryType): Response
     {
         $form = $this->createForm(ElementaryTypeType::class, $elementaryType);
@@ -81,6 +88,7 @@ class ElementaryTypeController extends AbstractController
         ]);
     }
 
+    //delete an elementaryType Object from a form
     /**
      * @Route("/{id}", name="elementary_type_delete", methods={"DELETE"})
      */

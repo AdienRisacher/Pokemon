@@ -21,29 +21,41 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 class SecurityController extends AbstractController
 {
 
-
+    /**
+     * Login action
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-
+        // Redirect to profile if the user is already authenticated
         if ($this->getUser()) {
             return $this->redirectToRoute('profile');
         }
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render('security/connexion.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-
-
+    /**
+     * Registration action
+     *
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param UserAuthenticatorInterface $userAuthenticator
+     * @param AppLoginAuthenticator $authenticator
+     * @param EntityManagerInterface $entityManager
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     #[Route('/inscription', name: 'inscription')]
     public function registration(Request $request,  UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppLoginAuthenticator $authenticator, EntityManagerInterface $entityManager,AuthenticationUtils $authenticationUtils): Response
     {
-
+        // Redirect to profile if the user is already authenticated
         if ($this->getUser()) {
             return $this->redirectToRoute('profile');
         }
@@ -80,10 +92,9 @@ class SecurityController extends AbstractController
         ]);
     }
 
-
-
-
-
+    /**
+     * Logout action
+     */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
