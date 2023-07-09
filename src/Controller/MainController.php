@@ -48,22 +48,22 @@ class MainController extends AbstractController
 
             $all_pokemon = $user->getMesPokemons();
 
-            foreach ($all_pokemon as $pok) {
-                if ($pok->getTimeActionChange() != null) {
+            foreach ($all_pokemon as $pokemon) {
+                if ($pokemon->getTimeActionChange() != null) {
 
-                    $timeRestant = $pok->getTimeActionChange()->add(new DateInterval('PT1H'));
-                    $time = new DateTime('now');
-                    if ($timeRestant < $time) {
-                        if ($pok->getAction() == 'dev') {
-                            $pok->setAction('normale');
-                            $pok->setTimeActionChange(new DateTime('now'));
-                            $entityManager->persist($pok);
+                    $tempsRestant = $pokemon->getTimeActionChange()->add(new DateInterval('PT1H'));
+                    $temps = new DateTime('now');
+                    if ($tempsRestant < $temps) {
+                        if ($pokemon->getAction() == 'dev') {
+                            $pokemon->setAction('normale');
+                            $pokemon->setTimeActionChange(new DateTime('now'));
+                            $entityManager->persist($pokemon);
                             $entityManager->flush();
-                        } elseif ($pok->getAction() == 'chasse') {
+                        } elseif ($pokemon->getAction() == 'chasse') {
 
-                            $pok->setAction('normale');
-                            $pok->setTimeActionChange(new DateTime('now'));
-                            $entityManager->persist($pok);
+                            $pokemon->setAction('normale');
+                            $pokemon->setTimeActionChange(new DateTime('now'));
+                            $entityManager->persist($pokemon);
                             $entityManager->flush();
                         }
                     }
@@ -71,9 +71,9 @@ class MainController extends AbstractController
 
             }
 
-            foreach ($user->getMesPokemons() as $pok) {
-                $pok->updateLevel();
-                $entityManager->persist($pok);
+            foreach ($user->getMesPokemons() as $pokemon) {
+                $pokemon->updateLevel();
+                $entityManager->persist($pokemon);
                 $entityManager->flush();
             }
 
@@ -123,12 +123,11 @@ class MainController extends AbstractController
     }
 
     #[Route('/Entrainer/{id}', name: 'Entrainer')]
-    public function entrainéUnPokemon(int $id, ManagerRegistry $doctrine, EntityManagerInterface $entityManager)
+    public function entrainerPokemon(int $id, ManagerRegistry $doctrine, EntityManagerInterface $entityManager)
     {
         $pokemonCollection = $doctrine->getRepository(PokemonCollection::class)->findOneBy(['id' => $id]);
         $pokemonCollection->updateExperiences();
         $pokemonCollection->setAction('dev');
-        $time = new \DateTime('now');
         $pokemonCollection->setTimeActionChange(new \DateTime('now'));
         $entityManager->persist($pokemonCollection);
         $entityManager->flush();
