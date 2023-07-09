@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Dresseur;
-use App\Entity\Dresseurs;
-use App\Form\RegistrationFormType;
 use App\Form\RegistrationType;
 use App\Security\AppLoginAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +24,7 @@ class SecurityController extends AbstractController
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
-    #[Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // Redirect to profile if the user is already authenticated
@@ -86,7 +84,7 @@ class SecurityController extends AbstractController
         }
 
 
-        return $this->render('security/registration.html.twig', [
+        return $this->render('security/inscription.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -94,7 +92,7 @@ class SecurityController extends AbstractController
     /**
      * Logout action
      */
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/deconnexion', name: 'app_logout')]
     public function logout(): void
     {
     }

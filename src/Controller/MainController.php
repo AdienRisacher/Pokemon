@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\HuntingWorld;
+use App\Entity\ChasseEmplacement;
 use App\Entity\PokemonCollection;
 
 use App\Entity\PokemonType;
@@ -11,7 +11,6 @@ use DateInterval;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,7 +42,7 @@ class MainController extends AbstractController
 
         // if the user has already a pokemon, get market infos, update the level of each pokemon, show the view
 
-        if ($user->isAvoirPremierPok()) {
+        if ($user->getAvoirPremierPok()) {
             $market = $doctrine->getRepository(PokemonCollection::class)->findBy(['action' => 'market']);
 
             $all_pokemon = $user->getMesPokemons();
@@ -84,7 +83,7 @@ class MainController extends AbstractController
             ]);
         }
 
-        return $this->render('firstPok.html.twig');
+        return $this->render('starter.html.twig');
     }
 
     #[Route('/FirstPokemon/{pokname}', name: 'FirstPokemon')]
@@ -92,7 +91,7 @@ class MainController extends AbstractController
     {
         $user = $this->getUser();
 
-        if ($user->isAvoirPremierPok()) {
+        if ($user->getAvoirPremierPok()) {
             $market = $doctrine->getRepository(PokemonCollection::class)->findBy(['action' => 'market']);
             return $this->render('profil.html.twig', [
                 'user' => $user,
@@ -105,7 +104,7 @@ class MainController extends AbstractController
 
         $pokemoncollection = new PokemonCollection();
         $pokemoncollection = $pokemoncollection->addPokmon($user, $pokemon);
-        $world = $doctrine->getRepository(HuntingWorld::class)->findOneBy(['id' => 6]);
+        $world = $doctrine->getRepository(ChasseEmplacement::class)->findOneBy(['id' => 6]);
         $pokemoncollection->setWorldChass($world);
 
 
@@ -184,7 +183,7 @@ class MainController extends AbstractController
     #[Route('/Chasser/{libelle}', name: 'Chasser')]
     public function Chasser(string $libelle, Request $request,ManagerRegistry $doctrine, EntityManagerInterface $entityManager)
     {
-        $world = $doctrine->getRepository(HuntingWorld::class)->findOneBy(['libelle' => $libelle]);
+        $world = $doctrine->getRepository(ChasseEmplacement::class)->findOneBy(['libelle' => $libelle]);
         $id = (int)$request->request->get('pokemon');
         $pokemonCollection = $doctrine->getRepository(PokemonCollection::class)->findOneBy(['id' => $id]);
         $pokemonCollection->setAction('chasse');
@@ -197,7 +196,7 @@ class MainController extends AbstractController
             $poki = array_rand($all_pokemon, 1);
             $pokemoncollection = new PokemonCollection();
             $pokemoncollection = $pokemoncollection->addPokmon($user, $all_pokemon[$poki]->getPokemon());
-            $huntingWorld = $doctrine->getRepository(HuntingWorld::class)->findOneBy(['id' => 6]);
+            $huntingWorld = $doctrine->getRepository(ChasseEmplacement::class)->findOneBy(['id' => 6]);
             $pokemoncollection->setWorldChass($huntingWorld);
             $entityManager->persist($pokemoncollection);
             $entityManager->flush();
