@@ -12,7 +12,7 @@
 
     <div class="app">
         <div class="header">
-            <img class="menu-circle" src="{{ asset('img/logo.png') }}" alt="" />
+            <img class="menu-circle" src="{{ asset('img/Pokemon.png') }}" alt="" />
 
             <div class="header-menu">
                 <a class="menu-link is-active" href="#Pokemons">Mes Pokemons</a>
@@ -26,7 +26,7 @@
                 <div class="side-wrapper">
 
                     <div class="side-menu">
-                        <img src="{{ asset('img/pokemon-trainer.png') }}"  alt="">
+                        <img src="{{ asset('img/dresseur.png') }}"  alt="">
                         <a href="">
                             {{ user.email }}
                         </a>
@@ -55,16 +55,16 @@
 
                                 <li class="adobe-product">
                                     <div class="products">
-                                        <img src="{{ asset('img/pokemon.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
+                                        <img src="{{ asset('img/pokeball.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
                                         {{ pokemon.pokemon.nom }}
                                     </div>
                                     <div class="products" style="padding-left: 50px;">
-                                        <img src="{{ asset('img/xp.png') }}" style="width: 30px;  margin-right: 20px;" alt="">
+                                        <img src="{{ asset('img/exp.png') }}" style="width: 30px;  margin-right: 20px;" alt="">
                                         {{ pokemon.experience }} Xp
                                     </div>
 
                                     <div class="products" style="padding-left: 50px;">
-                                        <img src="{{ asset('img/level.png') }}" style="width: 50px; margin-right: 5px;" alt="">
+                                        <img src="{{ asset('img/Up.png') }}" style="width: 50px; margin-right: 5px;" alt="">
                                         {{ pokemon.level }}
                                     </div>
 
@@ -118,24 +118,24 @@
                             {% for pokemon in market %}
                                 <li class="adobe-product">
                                     <div class="products">
-                                        <img src="{{ asset('img/pokemon-trainer.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
+                                        <img src="{{ asset('img/dresseur.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
                                         {{pokemon.dresseur.username}}
                                     </div>
 
 
                                     <div class="products"  style="padding-left: 50px;">
-                                        <img src="{{ asset('img/pokemon.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
+                                        <img src="{{ asset('img/pokeball.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
                                         {{pokemon.pokemon.nom}}
                                     </div>
 
                                     <div class="products" style="padding-left: 50px;">
-                                        <img src="{{ asset('img/xp.png') }}" style="width: 30px;  margin-right: 20px;" alt="">
+                                        <img src="{{ asset('img/exp.png') }}" style="width: 30px;  margin-right: 20px;" alt="">
                                         {{pokemon.experience}} Xp
                                     </div>
 
 
                                     <div class="products" style="padding-left: 50px;">
-                                        <img src="{{ asset('img/dollar.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
+                                        <img src="{{ asset('img/coincoin.png') }}"  style="width: 30px;  margin-right: 20px;" alt="">
                                         {{pokemon.prix}} $
                                     </div>
 
@@ -228,7 +228,7 @@
                         <div class="content-section-title">Choisir un monde pour chasser</div>
                         <div class="apps-card">
                             <div class="app-card">
-                                <img src="{{ asset('img/montagne.png') }}"  alt="">
+                                <img src="{{ asset('img/PMontagne.png') }}"  alt="">
                                 <span><a href="#"  class="worldbutton" onclick="chasser('montagne');return false;">La montagne</a></span>
                                 <div class="app-card__subtext">
                                     Envoyer votre pokemon à la montagne pour capter des nouveaux Pokemons
@@ -243,7 +243,7 @@
                             </div>
 
                             <div class="app-card">
-                                <img src="{{ asset('img/foret.png') }}" alt="">
+                                <img src="{{ asset('img/PForet.png') }}" alt="">
                                 <span><a href="#"  class="worldbutton"  onclick="chasser('foret');return false;">La forêt</a></span>
                                 <div class="app-card__subtext">
                                     Envoyer votre pokemon à la forêt pour capter des nouveaux Pokemons
@@ -258,7 +258,7 @@
                             </div>
 
                             <div class="app-card">
-                                <img src="{{ asset('img/prairie.png') }}"   alt="">
+                                <img src="{{ asset('img/PHautesHerbes.png') }}"   alt="">
                                 <span><a href="#" class="worldbutton"  onclick="chasser('prairie');return false;">La prairie</a></span>
                                 <div class="app-card__subtext">
                                     Envoyer votre pokemon à la prairie pour capter des nouveaux Pokemons
@@ -272,7 +272,7 @@
 
 
                             <div class="app-card">
-                                <img src="{{ asset('img/ville.png') }}"   alt="">
+                                <img src="{{ asset('img/PCenter.png') }}"   alt="">
                                 <span><a href="#"  class="worldbutton"  onclick="chasser('ville');return false;"> La ville</a></span>
                                 <div class="app-card__subtext">
                                     Envoyer votre pokemon à la ville pour capter des nouveaux Pokemons
@@ -286,7 +286,7 @@
 
 
                             <div class="app-card">
-                                <img src="{{ asset('img/plage.png') }}"   alt="">
+                                <img src="{{ asset('img/PMer.png') }}"   alt="">
                                 <span><a href="#"  class="worldbutton"  onclick="chasser('plage');return false;">  Plage</a></span>
                                 <div class="app-card__subtext">
                                     envoyer votre pokemon à la ville pour capter des nouveaux Pokemons
