@@ -59,27 +59,27 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('profile');
         }
 
-        $deresseur = new Dresseur();
-        $form = $this->createForm(RegistrationType::class, $deresseur);
+        $dresseur = new Dresseur();
+        $form = $this->createForm(RegistrationType::class, $dresseur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $deresseur->setPassword(
+            $dresseur->setPassword(
                 $userPasswordHasher->hashPassword(
-                    $deresseur,
-                    $deresseur->getPassword()
+                    $dresseur,
+                    $dresseur->getPassword()
                 )
             );
 
-            $deresseur->setCoins(5000);
-            $deresseur->setType(1);
-            $deresseur->setAvoirPremierPok(0);
+            $dresseur->setCoins(5000);
+            $dresseur->setType(1);
+            $dresseur->setAvoirPremierPok(0);
 
-            $entityManager->persist($deresseur);
+            $entityManager->persist($dresseur);
             $entityManager->flush();
             return $userAuthenticator->authenticateUser(
-                $deresseur,
+                $dresseur,
                 $authenticator,
                 $request
             );

@@ -16,9 +16,9 @@
 
             <div class="header-menu">
                 <a class="menu-link is-active" href="#Pokemons">Mes Pokemons</a>
-                <a class="menu-link" href="#Market">MarketPlace</a>
+                <a class="menu-link" href="#Market">Boutique</a>
                 <a class="menu-link" href="#chasse">Chasse</a>
-                <a class="menu-link" href="{{path('app_logout')}}">Log Out</a>
+                <a class="menu-link" href="{{path('app_logout')}}">Deconnexion</a>
             </div>
         </div>
         <div class="wrapper">
@@ -71,13 +71,13 @@
 
                                     <span class="status">
                                 {%if pokemon.action == 'normale'%}
-                                      <span class="status-circle"></span>normale</span>
+                                      <span class="status-circle"></span>Normal</span>
                                     {% elseif pokemon.action == 'market' %}
-                                        <span class="status-circle red"></span>en marché</span>
+                                        <span class="status-circle red"></span>En vente</span>
                                     {% elseif pokemon.action == 'dev' %}
-                                        <span class="status-circle green"></span>entraîné</span>
+                                        <span class="status-circle green"></span>Vient d'être entrainé</span>
                                     {% elseif pokemon.action == 'chasse' %}
-                                        <span class="status-circle orange"></span>a chassé</span>
+                                        <span class="status-circle orange"></span>Vient de chasser</span>
                                     {% endif %}
 
 
@@ -112,7 +112,7 @@
 
 
                     <div class="content-section" id="Market">
-                        <div class="content-section-title">Marché</div>
+                        <div class="content-section-title">Boutique</div>
                         <ul>
 
                             {% for pokemon in market %}
@@ -141,7 +141,7 @@
 
                                     {% if pokemon.dresseur.id != user.id  %}
                                         <div class="button-wrapper">
-                                            <button id="{{pokemon.id}}" onclick="achetter('{{ pokemon.id }}')" class="content-button status-button">Acheter</button>
+                                            <button id="{{pokemon.id}}" onclick="acheter('{{ pokemon.id }}')" class="content-button status-button">Acheter</button>
                                         </div>
                                     {% endif %}
                                 </li>
@@ -158,10 +158,10 @@
                                         </svg>
                                     </div>
 
-                                    <div class="pop-up__subtitle">Voulez vous vraiment acheter ce pokemon</div>
+                                    <div class="pop-up__subtitle">Voulez vous vraiment acheter ce pokemon ?</div>
 
                                     <div class="content-button-wrapper">
-                                        <button class="content-button status-button open close">Cancel</button>
+                                        <button class="content-button status-button open close">Annuler</button>
                                         <button class="content-button status-button" ><a id="acherterTag" href="#" >Acheter</a></button>
                                     </div>
                                 </div>
