@@ -141,7 +141,7 @@
 
                                     {% if pokemon.dresseur.id != user.id  %}
                                         <div class="button-wrapper">
-                                            <button id="{{pokemon.id}}" onclick="acheter('{{ pokemon.id }}')" class="content-button status-button">Acheter</button>
+                                            <button id="{{ pokemon.id }}" onclick="acheter('{{ pokemon.id }}')" class="content-button status-button">Acheter</button>
                                         </div>
                                     {% endif %}
                                 </li>
@@ -162,7 +162,7 @@
 
                                     <div class="content-button-wrapper">
                                         <button class="content-button status-button open close">Annuler</button>
-                                        <button class="content-button status-button" ><a id="acherterTag" href="#" >Acheter</a></button>
+                                        <button class="content-button status-button" ><a id="acheterTag" href="#" >Acheter</a></button>
                                     </div>
                                 </div>
                             </div>

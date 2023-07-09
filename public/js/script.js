@@ -63,8 +63,8 @@ $(".pop-up .close").click(function () {
 });
 
 function acheter(id) {
- $( "#acheterTag" ).attr("href", "/AcheterPokemon/".concat(id));
- $( "#acheterTag" ).attr("id", id);
+ $("#acheterTag").attr("href", "/AcheterPokemon/".concat(id));
+ $("#acheterTag").attr("id", id);
  $(".overlay-app").addClass("is-active");
  $("#acheter").addClass("visible");
 }
@@ -77,10 +77,10 @@ function vendre(id) {
 }
 
 
-function chasser(wolrd) {
+function chasser(world) {
  $(".overlay-app").addClass("is-active");
  $("#chasser").addClass("visible");
- $("#chasserforme").attr("action", "/Chasser/".concat(wolrd));
+ $("#chasserforme").attr("action", "/Chasser/".concat(world));
 }
 
 const toggleButton = document.querySelector('.dark-light');
