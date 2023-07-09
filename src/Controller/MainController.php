@@ -168,7 +168,7 @@ class MainController extends AbstractController
         return $this->redirectToRoute('profile');
     }
 
-    #[Route('/retirerMarche/{id}', name: 'retireMarcher')]
+    #[Route('/retirerMarche/{id}', name: 'retireMarche')]
     public function retirerMarche(int $id, Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager)
     {
         $pokemonCollection = $doctrine->getRepository(PokemonCollection::class)->findOneBy(['id' => $id]);
