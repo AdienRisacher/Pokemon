@@ -88,15 +88,16 @@
                 <div id="round-bordure-right-side"></div>
                 <!-- Right side screen -->
                 <div id="screen-right">
-                    <div class= "container b-container is-txl is-z200" id="b-container">
+                    <div class="form-container">
                         {{ form_start(form, {'attr': {'class': 'form','id': 'a-form'}}) }}
-                        {{form_row(form.username, {'attr': {'class': 'form__input','placeholder': 'Username'}})}}
-                        {{form_row(form.email, {'attr': {'class': 'form__input','placeholder': 'Email'}})}}
-                        {{form_row(form.password, {'attr': {'class': 'form__input','placeholder': 'Password'}})}}
-                        {{form_row(form.repeat_password, {'attr': {'class': 'form__input','placeholder': 'ConfirmPassword'}})}}
-
+                        {{ form_row(form.username, {'attr': {'class': 'form__input form__input-rounded','placeholder': 'Username'}}) }}
+                        {{ form_row(form.email, {'attr': {'class': 'form__input form__input-rounded','placeholder': 'Email'}}) }}
+                        {{ form_row(form.password, {'attr': {'class': 'form__input form__input-rounded','placeholder': 'Password'}}) }}
+                        {{ form_row(form.repeat_password, {'attr': {'class': 'form__input form__input-rounded','placeholder': 'Confirm Password'}}) }}
+                        {{ form_end(form) }}
                     </div>
                 </div>
+
                 <!-- Right side keyboard -->
                 <div id="keyboard">
                     <div class="key"></div>
@@ -122,25 +123,21 @@
                     <div class="key clickable"></div>
                     <div class="key clickable"></div>
                 </div>
-                <!-- Right side grey buttons -->
+
                 <div id="grey-buttons">
                     <div class="key">
                         <p>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                            <button class="form__button button " type="submit">S'inscrire</button>
+                            <button  class="form__button button button-register" type="submit">S'inscrire</button>
                             {{ form_end(form) }}
                         </p>
                     </div>
+                    <div class="key">
+                        <p>
+                            <a href="{{ path('app_login') }}" class="button-link" >Se connecter</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-
-        <div class="switch is-txr" id="switch-cnt">
-            <div class="switch__circle"></div>
-            <div class="switch__circle switch__circle--t"></div>
-            <div class="switch__container" id="switch-c1">
-                <div class="link"><a href="{{path("app_login")}}"><span>connecter</span></a> </div>
             </div>
         </div>
     </div>
