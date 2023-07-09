@@ -10,96 +10,96 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/elementary/type")
+ * @Route("/element/type")
  */
 class ElementaryTypeController extends AbstractController
 {
     /**
-     * @Route("/", name="elementary_type_index", methods={"GET"})
+     * @Route("/", name="typeElementIndex", methods={"GET"})
      */
     // Retrieve all records of the ElementaryType entity from the database using the Doctrine
     // entity manager, then pass them to the view to display them.
     public function index(): Response
     {
-        $elementaryTypes = $this->getDoctrine()
+        $typeElement = $this->getDoctrine()
             ->getRepository(ElementaryType::class)
             ->findAll();
 
-        return $this->render('elementary_type/index.html.twig', [
-            'elementary_types' => $elementaryTypes,
+        return $this->render('type_element/index.html.twig', [
+            'typeElement' => $typeElement,
         ]);
     }
 
     /**
-     * @Route("/new", name="elementary_type_new", methods={"GET","POST"})
+     * @Route("/new", name="typeElementNew", methods={"GET","POST"})
      */
     // Method called when trying to use a new instance of ElementaryType
     public function new(Request $request): Response
     {
-        $elementaryType = new ElementaryType();
-        $form = $this->createForm(ElementaryTypeType::class, $elementaryType);
+        $typeElement = new ElementaryType();
+        $form = $this->createForm(ElementaryTypeType::class, $typeElement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($elementaryType);
+            $entityManager->persist($typeElement);
             $entityManager->flush();
 
-            return $this->redirectToRoute('elementary_type_index');
+            return $this->redirectToRoute('typeElementIndex');
         }
 
-        return $this->render('elementary_type/new.html.twig', [
-            'elementary_type' => $elementaryType,
+        return $this->render('typeElement/new.html.twig', [
+            'typeElement' => $typeElement,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="elementary_type_show", methods={"GET"})
+     * @Route("/{id}", name="typeElementShow", methods={"GET"})
      */
 
     // Show details of an elementaryType object
-    public function show(ElementaryType $elementaryType): Response
+    public function show(ElementaryType $typeElement): Response
     {
-        return $this->render('elementary_type/show.html.twig', [
-            'elementary_type' => $elementaryType,
+        return $this->render('typeElement/show.html.twig', [
+            'typeElement' => $typeElement,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="elementary_type_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="typeElementEdit", methods={"GET","POST"})
      */
 
     // Changing an elementaryType object from a form
-    public function edit(Request $request, ElementaryType $elementaryType): Response
+    public function edit(Request $request, ElementaryType $typeElement): Response
     {
-        $form = $this->createForm(ElementaryTypeType::class, $elementaryType);
+        $form = $this->createForm(ElementaryTypeType::class, $typeElement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('elementary_type_index');
+            return $this->redirectToRoute('typeElementIndex');
         }
 
-        return $this->render('elementary_type/edit.html.twig', [
-            'elementary_type' => $elementaryType,
+        return $this->render('typeElement/edit.html.twig', [
+            'typeElement' => $typeElement,
             'form' => $form->createView(),
         ]);
     }
 
     // Delete an elementaryType Object from a form
     /**
-     * @Route("/{id}", name="elementary_type_delete", methods={"DELETE"})
+     * @Route("/{id}", name="typeElementDelete", methods={"DELETE"})
      */
-    public function delete(Request $request, ElementaryType $elementaryType): Response
+    public function delete(Request $request, ElementaryType $typeElement): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$elementaryType->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$typeElement->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($elementaryType);
+            $entityManager->remove($typeElement);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('elementary_type_index');
+        return $this->redirectToRoute('typeElementIndex');
     }
 }
