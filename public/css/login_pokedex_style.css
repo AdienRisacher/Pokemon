@@ -504,7 +504,6 @@ body {
     top: 150px;
     left: 232px;
 }
-
 #elongated-lights .key {
     width: 45px;
     height: 6px;
@@ -568,7 +567,19 @@ body {
 #grey-buttons p {
     margin: 12px;
     text-align: center;
+
 }
+
+#grey-buttons a {
+    text-decoration: none;
+    color:white;
+}
+
+.button-register {
+    text-decoration: none;
+    color:white;
+}
+
 .button-register {
     background-color:#4a4a4a;
     border : none;
@@ -578,13 +589,38 @@ body {
     color:black;
 }
 
+.button-log {
+    background-color: #4a4a4a;
+    border: none;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+
+#b-form {
+    margin: 30px;
+    margin: 25px;
+    text-align: center;
+}
+
+#inputEmail {
+    border-radius: 5px;
+}
+
+#inputPassword {
+    margin-top: 4px;
+    border-radius: 5px;
+}
+
 .form-container {
-    background-color: gray;
-    border-radius: 10px;
-    padding: 10px;
+    color: white;
+    font-size: 13px;
+    margin-left: 20px;
+    margin-top: 9px;
 }
 
 .form__input-rounded {
     border-radius: 5px;
+    margin-left: 5px;
 }
 
