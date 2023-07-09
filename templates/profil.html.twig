@@ -16,9 +16,9 @@
 
             <div class="header-menu">
                 <a class="menu-link is-active" href="#Pokemons">Mes Pokemons</a>
-                <a class="menu-link" href="#Market">Boutique</a>
+                <a class="menu-link" href="#Market">MarketPlace</a>
                 <a class="menu-link" href="#chasse">Chasse</a>
-                <a class="menu-link" href="{{path('app_logout')}}">Deconnexion</a>
+                <a class="menu-link" href="{{path('app_logout')}}">Log Out</a>
             </div>
         </div>
         <div class="wrapper">
@@ -71,13 +71,13 @@
 
                                     <span class="status">
                                 {%if pokemon.action == 'normale'%}
-                                      <span class="status-circle"></span>Normal</span>
+                                      <span class="status-circle"></span>normale</span>
                                     {% elseif pokemon.action == 'market' %}
-                                        <span class="status-circle red"></span>En vente</span>
+                                        <span class="status-circle red"></span>en marché</span>
                                     {% elseif pokemon.action == 'dev' %}
-                                        <span class="status-circle green"></span>Entrainé</span>
+                                        <span class="status-circle green"></span>entraîné</span>
                                     {% elseif pokemon.action == 'chasse' %}
-                                        <span class="status-circle orange"></span>Vient de chasser</span>
+                                        <span class="status-circle orange"></span>a chassé</span>
                                     {% endif %}
 
 
@@ -96,7 +96,7 @@
 
                                         {% elseif  pokemon.action == 'market'  %}
                                             <div class="button-wrapper">
-                                                <button id="{{pokemon.id}}" class="content-button2 status-button2"><a href={{ "/retirerMarcher/#{pokemon.id}" }} >Retirer</a> </button>
+                                                <button id="{{pokemon.id}}" class="content-button2 status-button2"><a   href={{ "/retirerMarcher/#{pokemon.id}" }} >Retirer</a> </button>
                                             </div>
                                         {% endif %}
                                     </div>
@@ -141,7 +141,7 @@
 
                                     {% if pokemon.dresseur.id != user.id  %}
                                         <div class="button-wrapper">
-                                            <button id="{{pokemon.id}}" onclick="acheter('{{ pokemon.id }}')" class="content-button status-button">Acheter</button>
+                                            <button id="{{pokemon.id}}" onclick="achetter('{{ pokemon.id }}')" class="content-button status-button">Acheter</button>
                                         </div>
                                     {% endif %}
                                 </li>
@@ -158,11 +158,11 @@
                                         </svg>
                                     </div>
 
-                                    <div class="pop-up__subtitle">Voulez vous vraiment acheter ce pokemon ?</div>
+                                    <div class="pop-up__subtitle">Voulez vous vraiment acheter ce pokemon</div>
 
                                     <div class="content-button-wrapper">
                                         <button class="content-button status-button open close">Cancel</button>
-                                        <button class="content-button status-button" ><a id="acheterTag" href="#" >Acheter</a></button>
+                                        <button class="content-button status-button" ><a id="acherterTag" href="#" >Acheter</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
                                         <div class="checkbox-wrapper"></div>
 
                                         <div class="content-button-wrapper">
-                                            <button class="content-button status-button open close">Annuler</button>
+                                            <button class="content-button status-button open close">Cancel</button>
                                             <button type="submit" class="content-button status-button" >Vendre</button>
                                         </div>
                                     </form>
@@ -201,9 +201,9 @@
                                     <form id="chasserforme" action="/Chasser" method="post">
                                         <div class="pop-up__subtitle">Spécifier votre pokemon
                                             <select name="pokemon" id="pokemon">
-                                                {% for monPokemon in user.mesPokemons %}
-                                                    {% if monPokemon.action == 'normale'  %}
-                                                        <option value="{{ monPokemon.id }}">{{ monPokemon.pokemon.nom }}</option>
+                                                {% for pokemon in user.mesPokemons %}
+                                                    {% if   pokemon.action == 'normale'  %}
+                                                        <option value="{{ pokemon.id }}">{{ pokemon.pokemon.nom }}</option>
                                                     {% endif %}
                                                 {% endfor %}
                                             </select>
@@ -231,7 +231,7 @@
                                 <img src="{{ asset('img/PMontagne.png') }}"  alt="">
                                 <span><a href="#"  class="worldbutton" onclick="chasser('montagne');return false;">La montagne</a></span>
                                 <div class="app-card__subtext">
-                                    Envoyer votre pokemon à la montagne pour capturer des nouveaux Pokemons
+                                    Envoyer votre pokemon à la montagne pour capter des nouveaux Pokemons
 
                                 </div>
 
@@ -246,12 +246,12 @@
                                 <img src="{{ asset('img/PForet.png') }}" alt="">
                                 <span><a href="#"  class="worldbutton"  onclick="chasser('foret');return false;">La forêt</a></span>
                                 <div class="app-card__subtext">
-                                    Envoyer votre pokemon à la forêt pour capturer des nouveaux Pokemons
+                                    Envoyer votre pokemon à la forêt pour capter des nouveaux Pokemons
 
                                 </div>
 
                                 <div class="app-card__subtext categories">
-                                    Catégorie : Insect, Normal, Spectre, Vol.
+                                    Catégorie : Insect, Normal, spectre, vol.
                                 </div>
 
 
@@ -261,11 +261,11 @@
                                 <img src="{{ asset('img/PHautesHerbes.png') }}"   alt="">
                                 <span><a href="#" class="worldbutton"  onclick="chasser('prairie');return false;">La prairie</a></span>
                                 <div class="app-card__subtext">
-                                    Envoyer votre pokemon à la prairie pour capturer des nouveaux Pokemons
+                                    Envoyer votre pokemon à la prairie pour capter des nouveaux Pokemons
                                 </div>
 
                                 <div class="app-card__subtext categories">
-                                    Catégorie : Feu, Normal, Plante, Sol, Vol.
+                                    Catégorie : Feu, Normal, plante, sol, vol, feu.
                                 </div>
 
                             </div>
@@ -275,11 +275,11 @@
                                 <img src="{{ asset('img/PCenter.png') }}"   alt="">
                                 <span><a href="#"  class="worldbutton"  onclick="chasser('ville');return false;"> La ville</a></span>
                                 <div class="app-card__subtext">
-                                    Envoyer votre pokemon à la ville pour capturer des nouveaux Pokemons
+                                    Envoyer votre pokemon à la ville pour capter des nouveaux Pokemons
                                 </div>
 
                                 <div class="app-card__subtext categories">
-                                    Catégorie : Combat, Electrique, Normal, Psy.
+                                    Catégorie : Combat, Electrik, Normal, Psy.
                                 </div>
 
                             </div>
@@ -289,11 +289,11 @@
                                 <img src="{{ asset('img/PMer.png') }}"   alt="">
                                 <span><a href="#"  class="worldbutton"  onclick="chasser('plage');return false;">  Plage</a></span>
                                 <div class="app-card__subtext">
-                                    Envoyer votre pokemon à la plage pour capturer des nouveaux Pokemons
+                                    envoyer votre pokemon à la plage pour capter des nouveaux Pokemons
                                 </div>
 
                                 <div class="app-card__subtext categories">
-                                    Catégorie : Dragon, Eau, Normal, Poison.
+                                    Catégorie : Dragon, EAU, Normal, Poinson.
                                 </div>
 
                             </div>
