@@ -139,9 +139,11 @@
                                         {{pokemon.prix}} $
                                     </div>
 
-                                    {% if   pokemon.dresseur.id != user.id  %}
+                                    {% if pokemon.dresseur.id != user.id  %}
                                         <div class="button-wrapper">
+
                                             <button id="{{pokemon.id}}" onclick="acheter({{pokemon.id}})" class="content-button status-button">Acheter</button>
+
                                         </div>
                                     {% endif %}
                                 </li>
@@ -289,7 +291,7 @@
                                 <img src="{{ asset('img/PMer.png') }}"   alt="">
                                 <span><a href="#"  class="worldbutton"  onclick="chasser('plage');return false;">  Plage</a></span>
                                 <div class="app-card__subtext">
-                                    envoyer votre pokemon à la ville pour capter des nouveaux Pokemons
+                                    envoyer votre pokemon à la plage pour capter des nouveaux Pokemons
                                 </div>
 
                                 <div class="app-card__subtext categories">
