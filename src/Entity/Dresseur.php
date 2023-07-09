@@ -165,13 +165,6 @@ class Dresseur implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, PokemonCollection>
-     */
-    public function getMesPokomons(): Collection
-    {
-        return $this->mesPokemons;
-    }
 
     public function addPok(PokemonCollection $pok): self
     {
@@ -225,7 +218,7 @@ class Dresseur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isAvoirPremierPok(): ?bool
+    public function getAvoirPremierPok(): ?bool
     {
         return $this->avoirPremierPok;
     }

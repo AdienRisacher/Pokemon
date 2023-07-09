@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Entity\Hunting;
-use App\Repository\HuntingWorldRepository;
+use App\Entity\Chasse;
+use App\Repository\ChasseEmplacementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: HuntingWorldRepository::class)]
-class HuntingWorld
+#[ORM\Entity(repositoryClass: ChasseEmplacementRepository::class)]
+class ChasseEmplacement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,7 +19,7 @@ class HuntingWorld
     #[ORM\Column(type: 'string', length: 255)]
     private $libelle;
 
-    #[ORM\OneToMany(mappedBy: 'world', targetEntity: Hunting::class)]
+    #[ORM\OneToMany(mappedBy: 'world', targetEntity: Chasse::class)]
     private $PokemonPossible;
 
     public function __construct()
@@ -45,14 +45,14 @@ class HuntingWorld
     }
 
     /**
-     * @return Collection<int, Hunting>
+     * @return Collection<int, Chasse>
      */
     public function getPokemonPossible(): Collection
     {
         return $this->PokemonPossible;
     }
 
-    public function addPokemonPossible(Hunting $pokemonPossible): self
+    public function addPokemonPossible(Chasse $pokemonPossible): self
     {
         if (!$this->PokemonPossible->contains($pokemonPossible)) {
             $this->PokemonPossible[] = $pokemonPossible;
@@ -62,7 +62,7 @@ class HuntingWorld
         return $this;
     }
 
-    public function removePokemonPossible(Hunting $pokemonPossible): self
+    public function removePokemonPossible(Chasse $pokemonPossible): self
     {
         if ($this->PokemonPossible->removeElement($pokemonPossible)) {
             // set the owning side to null (unless already changed)

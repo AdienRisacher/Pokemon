@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Dresseur;
-use App\Entity\HuntingWorld;
+use App\Entity\ChasseEmplacement;
 use App\Entity\PokemonType;
 use App\Repository\PokemonCollectionRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -41,7 +41,7 @@ class PokemonCollection
     #[ORM\Column(type: 'datetime')]
     private $timeActionChange;
 
-    #[ORM\ManyToOne(targetEntity: HuntingWorld::class, inversedBy: 'PokemonPossible')]
+    #[ORM\ManyToOne(targetEntity: ChasseEmplacement::class, inversedBy: 'PokemonPossible')]
     #[ORM\JoinColumn(nullable: false,columnDefinition: 'INT DEFAULT 6')]
     private $worldChass;
 

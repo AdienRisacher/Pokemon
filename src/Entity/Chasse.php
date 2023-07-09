@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Entity\HuntingWorld;
+use App\Entity\ChasseEmplacement;
 use App\Entity\PokemonType;
-use App\Repository\HuntingRepository;
+use App\Repository\ChasseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: HuntingRepository::class)]
-class Hunting
+#[ORM\Entity(repositoryClass: ChasseRepository::class)]
+class Chasse
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,7 +19,7 @@ class Hunting
     #[ORM\JoinColumn(nullable: false)]
     private $pokemon;
 
-    #[ORM\ManyToOne(targetEntity: HuntingWorld::class, inversedBy: 'PokemonPossible')]
+    #[ORM\ManyToOne(targetEntity: ChasseEmplacement::class, inversedBy: 'PokemonPossible')]
     #[ORM\JoinColumn(nullable: false)]
     private $world;
 
@@ -40,12 +40,12 @@ class Hunting
         return $this;
     }
 
-    public function getWorld(): ?HuntingWorld
+    public function getWorld(): ?ChasseEmplacement
     {
         return $this->world;
     }
 
-    public function setWorld(?HuntingWorld $world): self
+    public function setWorld(?ChasseEmplacement $world): self
     {
         $this->world = $world;
 

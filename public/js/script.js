@@ -58,19 +58,13 @@ $(function () {
  });
 });
 
-// $(".status-button:not(.open)").click(function (event) {
-//  $( "#acherterTag" ).attr("href", "/AcheterPokemon/".concat(event.target.id));
-//  $( "#acherterTag" ).attr("id", event.target.id);
-//  $(".pop-up").addClass("visible");
-// });
-
 $(".pop-up .close").click(function () {
  $(".pop-up").removeClass("visible");
 });
 
-function achetter(id) {
- $( "#acherterTag" ).attr("href", "/AcheterPokemon/".concat(id));
- $( "#acherterTag" ).attr("id", id);
+function acheter(id) {
+ $( "#acheterTag" ).attr("href", "/AcheterPokemon/".concat(id));
+ $( "#acheterTag" ).attr("id", id);
  $(".overlay-app").addClass("is-active");
  $("#acheter").addClass("visible");
 }
